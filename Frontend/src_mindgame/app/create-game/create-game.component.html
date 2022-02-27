@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+          <h1>Start a new game</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <p>Your name:</p>
+            <input [(ngModel)]="playerName" type="text" class="form-control">
+            <p class="text-muted">Enter your name</p>
+        </div>
+        <div class="col">
+            <p>Maximum number of tries (6 - 12):</p>
+            <input [(ngModel)]="numberOfTries" type="text" class="form-control">
+            <p class="text-muted">Enter the maximum number of tries to guess the color pattern</p>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+          <button [disabled]="!(playerName.length >= 1)" class="btn btn-primary" (click)="startGameComponent(playerName, numberOfTries)">Start new game</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+          <div *ngIf="showAlert" class="alert alert-danger" role="alert">
+              Enter a valid number of tries
+          </div>
+        </div>
+      
+    </div>
+</div>

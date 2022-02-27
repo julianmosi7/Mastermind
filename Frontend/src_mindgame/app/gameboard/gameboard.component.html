@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Hi {{playerName}}! Your game ID is {{gameId}}</h1>
+        </div>
+    </div>
+
+    <div *ngFor="let attempt of attempts">
+        <div class="row">
+            <div class="col">
+                <h5>{{attempt.numberAttempt+1}}. Attempt ({{attempt.numberOfTries}} left):</h5>
+            </div>
+    
+            <div class="col" *ngFor="let x of [1, 2, 3, 4]">
+                <app-attempt [availableColors]="availableColors"
+                             [selectedColor]="attempt.guessedColorPattern[x-1]">
+                </app-attempt>
+            </div>
+    
+            <div class="col">
+                <div *ngIf="showCorrectColors">
+                    <div class="row">
+                        <div class="col">
+                            <a>Correct color: {{attempt.correctColors}}</a>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col">
+                            <a>Correct color and position: {{attempt.correctColorsPosition}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+   
+
+    <div class="row" *ngIf="(!gameWon) OR (!gameLost)">
+        <div class="col">
+            <h5>{{attempts.length+1}}. Attempt ({{numberOfTries-1}} left):</h5>
+        </div>
+
+        <div class="col" *ngFor="let number of numbers; let i = index">
+            <app-attempt [availableColors]="availableColors"
+                         
+                         (colorChosen)="colorChosen(i, $event)">
+            </app-attempt>
+        </div>
+
+        <div class="col">
+            <button [disabled]="!submitAttemptEnabled" class="btn btn-primary" (click)="submitAttempt(guessedColorPattern)">Submit attempt</button>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="gameWon">
+        <div class="col">
+            <h4>Great, you have solved the pattern :)</h4>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="gameLost">
+        <div class="col">
+            <h4>Sorry, no more tries left :(</h4>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
